@@ -16,7 +16,10 @@
     "react-material-ui-form-validator": "^2.0.3",
     "react-native": "0.57.7",
     "react-native-elements": "^1.0.0-beta7",
-    "react-native-vector-icons": "^6.1.0"
+    "react-native-gesture-handler": "^1.0.12",
+    "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-vector-icons": "^6.1.0",
+    "react-navigation": "^3.0.9"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
