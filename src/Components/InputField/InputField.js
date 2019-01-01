@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const error = false;
 
@@ -29,7 +30,7 @@ class InputField extends React.Component {
         placeholder={placeholder}
         onChangeText={text => this.onChanged(text)}
         value={myNumber}
-        rightIcon={{ type: 'font-awesome', name: 'percent' }}
+        rightIcon={<Icon name="percent" />}
         keyboardType="decimal-pad"
         errorStyle={{ color: 'red' }}
         errorMessage={error ? 'ENTER A VALID ERROR HERE' : null}

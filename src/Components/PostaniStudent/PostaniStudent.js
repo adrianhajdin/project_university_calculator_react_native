@@ -7,12 +7,12 @@ import styles from '../../styles/styles';
 
 const PostaniStudent = () => (
   <View style={styles.inputContainer}>
-    <Text style={styles.inputParagraph}>Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:
+    <Text style={styles.inputParagraph}>Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: &nbsp;
       <Text
         style={{ color: 'blue', fontSize: 20 }}
         onPress={() => Linking.openURL('https://www.postani-student.hr/Ucilista/Nositelji.aspx')}
       >
-        POSTANI STUDENT
+      POSTANI STUDENT
       </Text>
     </Text>
   </View>
