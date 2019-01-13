@@ -1,4 +1,5 @@
 export const initialState = {
+  text: '',
   activeStep: 0,
   evaluationMaturaElectiveInputs2: false,
   evaluationMaturaElectiveInputs3: false,
