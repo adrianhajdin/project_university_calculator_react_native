@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 const white = '#fff';
 
 export default StyleSheet.create({
+  container: {
+    padding: 20,
+  },
   inputContainer: {
     display: 'flex',
     alignItems: 'center',

@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import Swiper from 'react-native-swiper';
 
 import styles from './styles/styles';
 
@@ -57,157 +59,126 @@ class App extends React.Component {
       percentageMaturaCroatian,
       percentageMaturaMathematics,
       percentageMaturaEnglish,
+      percentagesTotal,
+      pointsMaturaEnglish,
+      pointsMaturaCroatian,
+      pointsMaturaElective1,
+      pointsMaturaElective2,
+      pointsMaturaElective3,
+      pointsMaturaMathematics,
+      pointsExtraField1,
+      pointsExtraField2,
+      pointsExtraField3,
     } = this.state;
 
-    let dialogContent;
-
-    switch (activeStep) {
-      case 0:
-        dialogContent = (
-          <View>
-            <PostaniStudent />
-            <View style={styles.inputContainer}>
-              <InputComponent
-                heading="Ocjene iz srednje škole"
-                paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole"
-              />
-              <InputField
-                placeholder="Prosjek svih ocjena*"
-                onChangeText={value => this.setState({ evaluationSchoolGrades: value })}
-                value={evaluationSchoolGrades}
-                percentage
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <InputComponent
-                heading="Obvezni dio državne mature"
-                paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio državne mature"
-              />
-              <InputField
-                onChangeText={value => this.setState({ evaluationMaturaCroatian: value })}
-                value={evaluationMaturaCroatian}
-                percentage
-                placeholder="Hrvatski jezik*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ evaluationMaturaMathematics: value })}
-                value={evaluationMaturaMathematics}
-                percentage
-                placeholder="Matematika*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ evaluationMaturaEnglish: value })}
-                value={evaluationMaturaEnglish}
-                percentage
-                placeholder="Engleski jezik*"
-              />
-            </View>
-          </View>
-        );
-        break;
-      case 1:
-        dialogContent = (
-          <View>
-            <View style={styles.inputContainer}>
-              <InputComponent
-                heading="Prosjeci ocjena srednje škole"
-                paragraph="Ovdje upišite prosjeke ocjena koje ste postigli tijekom
-                          četiri razreda srednje škole"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageFirstGrade: value })}
-                value={percentageFirstGrade}
-                percentage
-                placeholder="1. razred*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageSecondGrade: value })}
-                value={percentageSecondGrade}
-                percentage
-                placeholder="2. razred*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageThirdGrade: value })}
-                value={percentageThirdGrade}
-                percentage
-                placeholder="3. razred*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageFourthGrade: value })}
-                value={percentageFourthGrade}
-                percentage
-                placeholder="4. razred*"
-              />
-            </View>
-          </View>
-        );
-        break;
-      case 2:
-        dialogContent = (
-          <View>
-            <View style={styles.inputContainer}>
-              <InputComponent
-                heading="Rezultati mature"
-                paragraph="Ovdje upišite rezultate koje ste postigli na
-                          ispitima državne mature"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
-                value={percentageMaturaCroatian}
-                percentage
-                placeholder="Hrvatski jezik*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
-                value={percentageMaturaMathematics}
-                percentage
-                placeholder="Matematika*"
-              />
-              <InputField
-                onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
-                value={percentageMaturaEnglish}
-                percentage
-                placeholder="Engleski jezik*"
-              />
-            </View>
-          </View>
-        );
-        break;
-      case 3:
-        const { percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
-
-        const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-        const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
-
-        dialogContent = (
-          <View>
-            <View style={styles.inputContainer}>
-              <Results props={{ ...this.state, totalGradePoints }} />
-            </View>
-          </View>
-        );
-        break;
-      default:
-        break;
-    }
+    const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
+    const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
     return (
-      <ScrollView
-        children={(
-          <React.Fragment>
-            <View>
-              <Header />
-              {dialogContent}
-            </View>
-            <ButtonGroup
-              activeStep={activeStep}
-              onForward={this.handlePress}
-              onBack={() => this.handleBack(activeStep)}
-              onBeginning={this.handleBeginning}
+      <Swiper onIndexChanged={this.handlePress} showsButtons>
+        <View style={styles.container}>
+          <PostaniStudent />
+          <View style={styles.inputContainer}>
+            <InputComponent
+              heading="Ocjene iz srednje škole"
+              paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole"
             />
-          </React.Fragment>
-        )}
-      />
+            <InputField
+              placeholder="Prosjek svih ocjena*"
+              onChangeText={value => this.setState({ evaluationSchoolGrades: value })}
+              value={evaluationSchoolGrades}
+              percentage
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <InputComponent
+              heading="Obvezni dio državne mature"
+              paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio državne mature"
+            />
+            <InputField
+              onChangeText={value => this.setState({ evaluationMaturaCroatian: value })}
+              value={evaluationMaturaCroatian}
+              percentage
+              placeholder="Hrvatski jezik*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ evaluationMaturaMathematics: value })}
+              value={evaluationMaturaMathematics}
+              percentage
+              placeholder="Matematika*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ evaluationMaturaEnglish: value })}
+              value={evaluationMaturaEnglish}
+              percentage
+              placeholder="Engleski jezik*"
+            />
+          </View>
+        </View>
+        <View>
+          <View style={styles.inputContainer}>
+            <InputComponent
+              heading="Prosjeci ocjena srednje škole"
+              paragraph="Ovdje upišite prosjeke ocjena koje ste postigli tijekom četiri razreda srednje škole"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageFirstGrade: value })}
+              value={percentageFirstGrade}
+              percentage
+              placeholder="1. razred*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageSecondGrade: value })}
+              value={percentageSecondGrade}
+              percentage
+              placeholder="2. razred*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageThirdGrade: value })}
+              value={percentageThirdGrade}
+              percentage
+              placeholder="3. razred*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageFourthGrade: value })}
+              value={percentageFourthGrade}
+              percentage
+              placeholder="4. razred*"
+            />
+          </View>
+        </View>
+        <View>
+          <View style={styles.inputContainer}>
+            <InputComponent
+              heading="Rezultati mature"
+              paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
+              value={percentageMaturaCroatian}
+              percentage
+              placeholder="Hrvatski jezik*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
+              value={percentageMaturaMathematics}
+              percentage
+              placeholder="Matematika*"
+            />
+            <InputField
+              onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
+              value={percentageMaturaEnglish}
+              percentage
+              placeholder="Engleski jezik*"
+            />
+          </View>
+        </View>
+        <View>
+          <View style={styles.inputContainer}>
+            <Results props={{ ...this.state, totalGradePoints }} />
+          </View>
+        </View>
+      </Swiper>
     );
   }
 }
