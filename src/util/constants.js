@@ -1,5 +1,6 @@
 export const initialState = {
   text: '',
+  splash: true,
   activeStep: 0,
   evaluationMaturaElectiveInputs2: false,
   evaluationMaturaElectiveInputs3: false,
