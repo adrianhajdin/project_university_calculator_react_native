@@ -3,6 +3,19 @@ import { StyleSheet } from 'react-native';
 const white = '#fff';
 
 export default StyleSheet.create({
+  loginScreenButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: white,
+    height: 60,
+    width: 180,
+    borderRadius: 40,
+  },
+  loginText: {
+    color: '#2569fa',
+    fontSize: 20,
+  },
   containerSwiper: {
     display: 'flex',
     justifyContent: 'center',
@@ -10,7 +23,7 @@ export default StyleSheet.create({
   },
   container: {
     display: 'flex',
-    height: 200,
+    height: 250,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -28,23 +41,27 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    color: white,
     fontSize: 35,
     textAlign: 'center',
     fontFamily: 'Montserrat-Regular',
     letterSpacing: 1.5,
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 126,
+    width: 126,
   },
   inputContainer: {
     display: 'flex',
     alignItems: 'center',
     marginTop: 25,
+    marginBottom: 25,
+    padding: 15,
   },
   inputHeading: {
     fontSize: 25,
     fontFamily: 'Montserrat-Regular',
+    color: white,
 
     marginBottom: 15,
     textAlign: 'center',
@@ -52,6 +69,7 @@ export default StyleSheet.create({
   inputParagraph: {
     fontSize: 18,
     fontFamily: 'Montserrat-Regular',
+    color: white,
 
     marginRight: 25,
     marginLeft: 25,
