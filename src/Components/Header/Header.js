@@ -6,7 +6,7 @@ import styles from '../../styles/styles';
 const header = () => (
   <Header>
     <Icon name="menu" color="#fff" />
-    <Text style={styles.heading}>Kalkulator za maturu</Text>
+    <Text style={styles.heading}>AwesomeProject</Text>
     <Icon name="home" color="#fff" />
   </Header>
 );

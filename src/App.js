@@ -3,16 +3,21 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import Swiper from 'react-native-swiper';
 
-import { } from 'react-native-elements';
-
 import LinearGradient from 'react-native-linear-gradient';
 
+import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './styles/styles';
 
 import { initialState } from './util/constants';
 import { calculateTotalGradePoints, calculateTotalMaturaPoints, calculateMaturaPoints, calculatePercentages, calculatePoints } from './util/functions';
 
-import { Results, InputComponent, InputField, PostaniStudent, Header, ButtonGroup, ScrollView } from './Components';
+import { Results, InputComponent, PostaniStudent, CustomTextInput } from './Components';
+
+const logo = require('./Images/icon-white.png');
+
+EStyleSheet.build({
+  $textColor: '#0275d8',
+});
 
 class App extends React.Component {
   state = initialState;
@@ -26,7 +31,34 @@ class App extends React.Component {
   handleBack = activeStep => this.setState({ activeStep: activeStep - 1 });
 
   handlePress = () => {
-    const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
+    const {
+      activeStep,
+      evaluationExtraField1,
+      evaluationExtraField2,
+      evaluationExtraField3,
+      evaluationMaturaCroatian,
+      evaluationMaturaCroatianLevel,
+      evaluationMaturaElective1,
+      evaluationMaturaElective2,
+      evaluationMaturaElective3,
+      evaluationMaturaEnglish,
+      evaluationMaturaEnglishLevel,
+      evaluationMaturaMathematics,
+      evaluationMaturaMathematicsLevel,
+      percentageExtraField1,
+      percentageExtraField2,
+      percentageExtraField3,
+      percentageFirstGrade,
+      percentageFourthGrade,
+      percentageMaturaCroatian,
+      percentageMaturaElective1,
+      percentageMaturaElective2,
+      percentageMaturaElective3,
+      percentageMaturaEnglish,
+      percentageMaturaMathematics,
+      percentageSecondGrade,
+      percentageThirdGrade,
+    } = this.state;
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
@@ -53,7 +85,6 @@ class App extends React.Component {
 
   render() {
     const {
-      activeStep,
       evaluationSchoolGrades,
       evaluationMaturaCroatian,
       evaluationMaturaMathematics,
@@ -66,20 +97,20 @@ class App extends React.Component {
       percentageMaturaMathematics,
       percentageMaturaEnglish,
       percentagesTotal,
-      pointsMaturaEnglish,
-      pointsMaturaCroatian,
-      pointsMaturaElective1,
-      pointsMaturaElective2,
-      pointsMaturaElective3,
-      pointsMaturaMathematics,
-      pointsExtraField1,
-      pointsExtraField2,
-      pointsExtraField3,
+      // pointsMaturaEnglish,
+      // pointsMaturaCroatian,
+      // pointsMaturaElective1,
+      // pointsMaturaElective2,
+      // pointsMaturaElective3,
+      // pointsMaturaMathematics,
+      // pointsExtraField1,
+      // pointsExtraField2,
+      // pointsExtraField3,
       splash,
     } = this.state;
 
     const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-    const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
+    // const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
     return (
       splash ? (
@@ -87,7 +118,7 @@ class App extends React.Component {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={require('./Images/icon-white.png')}
+              source={logo}
             />
           </View>
           <View style={styles.textContainer}>
@@ -102,125 +133,126 @@ class App extends React.Component {
             </TouchableOpacity>
           </View>
         </LinearGradient>
+      ) : (
+        <Swiper onIndexChanged={this.handlePress}>
+          <LinearGradient colors={['#b828fb', '#2569fa']}>
+            <View style={styles.containerSwiper}>
+              <PostaniStudent />
+              <View style={styles.inputContainer}>
+                <InputComponent
+                  heading="Ocjene iz srednje škole"
+                  paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole."
+                />
+                <CustomTextInput
+                  placeholder="Prosjek svih ocjena*"
+                  onChangeText={value => this.setState({ evaluationSchoolGrades: value })}
+                  value={evaluationSchoolGrades}
+                  percentage
+                />
+              </View>
+            </View>
+          </LinearGradient>
+          <LinearGradient colors={['#b828fb', '#2569fa']}>
+            <View style={styles.containerSwiper}>
+              <PostaniStudent />
+              <View style={styles.inputContainer}>
+                <InputComponent
+                  heading="Obvezni dio državne mature"
+                  paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio državne mature"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ evaluationMaturaCroatian: value })}
+                  value={evaluationMaturaCroatian}
+                  percentage
+                  placeholder="Hrvatski jezik*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ evaluationMaturaMathematics: value })}
+                  value={evaluationMaturaMathematics}
+                  percentage
+                  placeholder="Matematika*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ evaluationMaturaEnglish: value })}
+                  value={evaluationMaturaEnglish}
+                  percentage
+                  placeholder="Engleski jezik*"
+                />
+
+              </View>
+            </View>
+          </LinearGradient>
+          <LinearGradient colors={['#b828fb', '#2569fa']}>
+            <View style={styles.containerSwiper}>
+              <View style={styles.inputContainer}>
+                <InputComponent
+                  heading="Prosjeci ocjena srednje škole"
+                  paragraph="Ovdje upišite prosjeke ocjena koje ste postigli tijekom četiri razreda srednje škole"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageFirstGrade: value })}
+                  value={percentageFirstGrade}
+                  percentage
+                  placeholder="1. razred*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageSecondGrade: value })}
+                  value={percentageSecondGrade}
+                  percentage
+                  placeholder="2. razred*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageThirdGrade: value })}
+                  value={percentageThirdGrade}
+                  percentage
+                  placeholder="3. razred*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageFourthGrade: value })}
+                  value={percentageFourthGrade}
+                  percentage
+                  placeholder="4. razred*"
+                />
+              </View>
+            </View>
+          </LinearGradient>
+          <LinearGradient colors={['#b828fb', '#2569fa']}>
+            <View style={styles.containerSwiper}>
+              <View style={styles.inputContainer}>
+                <InputComponent
+                  heading="Rezultati mature"
+                  paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
+                  value={percentageMaturaCroatian}
+                  percentage
+                  placeholder="Hrvatski jezik*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
+                  value={percentageMaturaMathematics}
+                  percentage
+                  placeholder="Matematika*"
+                />
+                <CustomTextInput
+                  onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
+                  value={percentageMaturaEnglish}
+                  percentage
+                  placeholder="Engleski jezik*"
+                />
+              </View>
+            </View>
+          </LinearGradient>
+          <LinearGradient colors={['#b828fb', '#2569fa']}>
+            <View style={styles.containerSwiper}>
+              <View style={styles.inputContainer}>
+                <Results props={{ ...this.state, totalGradePoints }} />
+              </View>
+            </View>
+          </LinearGradient>
+        </Swiper>
       )
-        : (
-          <Swiper onIndexChanged={this.handlePress}>
-            <LinearGradient colors={['#b828fb', '#2569fa']}>
-              <View style={styles.containerSwiper}>
-                <PostaniStudent />
-                <View style={styles.inputContainer}>
-                  <InputComponent
-                    heading="Ocjene iz srednje škole"
-                    paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole."
-                  />
-                  <InputField
-                    placeholder="Prosjek svih ocjena*"
-                    onChangeText={value => this.setState({ evaluationSchoolGrades: value })}
-                    value={evaluationSchoolGrades}
-                    percentage
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <LinearGradient colors={['#b828fb', '#2569fa']}>
-              <View style={styles.containerSwiper}>
-                <View style={styles.inputContainer}>
-                  <InputComponent
-                    heading="Obvezni dio državne mature"
-                    paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio državne mature"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ evaluationMaturaCroatian: value })}
-                    value={evaluationMaturaCroatian}
-                    percentage
-                    placeholder="Hrvatski jezik*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ evaluationMaturaMathematics: value })}
-                    value={evaluationMaturaMathematics}
-                    percentage
-                    placeholder="Matematika*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ evaluationMaturaEnglish: value })}
-                    value={evaluationMaturaEnglish}
-                    percentage
-                    placeholder="Engleski jezik*"
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <LinearGradient colors={['#b828fb', '#2569fa']}>
-              <View style={styles.containerSwiper}>
-                <View style={styles.inputContainer}>
-                  <InputComponent
-                    heading="Prosjeci ocjena srednje škole"
-                    paragraph="Ovdje upišite prosjeke ocjena koje ste postigli tijekom četiri razreda srednje škole"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageFirstGrade: value })}
-                    value={percentageFirstGrade}
-                    percentage
-                    placeholder="1. razred*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageSecondGrade: value })}
-                    value={percentageSecondGrade}
-                    percentage
-                    placeholder="2. razred*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageThirdGrade: value })}
-                    value={percentageThirdGrade}
-                    percentage
-                    placeholder="3. razred*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageFourthGrade: value })}
-                    value={percentageFourthGrade}
-                    percentage
-                    placeholder="4. razred*"
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <LinearGradient colors={['#b828fb', '#2569fa']}>
-              <View style={styles.containerSwiper}>
-                <View style={styles.inputContainer}>
-                  <InputComponent
-                    heading="Rezultati mature"
-                    paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
-                    value={percentageMaturaCroatian}
-                    percentage
-                    placeholder="Hrvatski jezik*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
-                    value={percentageMaturaMathematics}
-                    percentage
-                    placeholder="Matematika*"
-                  />
-                  <InputField
-                    onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
-                    value={percentageMaturaEnglish}
-                    percentage
-                    placeholder="Engleski jezik*"
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <LinearGradient colors={['#b828fb', '#2569fa']}>
-              <View style={styles.containerSwiper}>
-                <View style={styles.inputContainer}>
-                  <Results props={{ ...this.state, totalGradePoints }} />
-                </View>
-              </View>
-            </LinearGradient>
-          </Swiper>
-        )
     );
   }
 }
