@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-
-import Swiper from 'react-native-swiper';
+import { View, Text, Image, StatusBar } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -11,7 +9,7 @@ import styles from './styles/styles';
 import { initialState } from './util/constants';
 import { calculateTotalGradePoints, calculateTotalMaturaPoints, calculateMaturaPoints, calculatePercentages, calculatePoints } from './util/functions';
 
-import { Results, InputComponent, PostaniStudent, CustomTextInput } from './Components';
+import { Results, InputComponent, PostaniStudent, CustomTextInput, CustomButton, CustomLinearGradient } from './Components';
 
 const logo = require('./Images/icon-white.png');
 
@@ -23,8 +21,6 @@ class App extends React.Component {
   state = initialState;
 
   // handleSelectChange = ({ target: { value, name } }) => this.setState({ [name]: value });
-
-  handleStart = () => this.setState({ splash: false })
 
   handleBeginning = () => this.setState({ activeStep: 0 })
 
@@ -80,6 +76,12 @@ class App extends React.Component {
         pointsMaturaCroatian: calculateMaturaPoints(percentageMaturaCroatian, evaluationMaturaCroatian, evaluationMaturaCroatianLevel),
         pointsMaturaMathematics: calculateMaturaPoints(percentageMaturaMathematics, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel),
       });
+    } else if (activeStep === 3) {
+      this.setState({ activeStep: activeStep + 1 });
+    } else if (activeStep === 4) {
+      this.setState({ activeStep: activeStep + 1 });
+    } else if (activeStep === 5) {
+      this.setState({ activeStep: activeStep + 1 });
     }
   }
 
@@ -97,6 +99,7 @@ class App extends React.Component {
       percentageMaturaMathematics,
       percentageMaturaEnglish,
       percentagesTotal,
+      activeStep,
       // pointsMaturaEnglish,
       // pointsMaturaCroatian,
       // pointsMaturaElective1,
@@ -106,37 +109,35 @@ class App extends React.Component {
       // pointsExtraField1,
       // pointsExtraField2,
       // pointsExtraField3,
-      splash,
     } = this.state;
 
     const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
     // const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
-    return (
-      splash ? (
-        <LinearGradient colors={['#b828fb', '#2569fa']}>
-          <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={logo}
-            />
+    let content = (
+      <CustomLinearGradient
+        children={(
+          <View>
+            <View style={styles.container}>
+              <Image
+                style={styles.image}
+                source={logo}
+              />
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>Najbolji način za izračunati ukupan broj bodova za upis na fakulet.</Text>
+            </View>
+            <CustomButton onPress={this.handlePress} buttonText="KRENI" />
           </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Najbolji način za izračunati ukupan broj bodova za upis na fakulet.</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.loginScreenButton}
-              onPress={this.handleStart}
-            >
-              <Text style={styles.loginText}>Kreni</Text>
-            </TouchableOpacity>
-          </View>
-        </LinearGradient>
-      ) : (
-        <Swiper onIndexChanged={this.handlePress}>
-          <LinearGradient colors={['#b828fb', '#2569fa']}>
-            <View style={styles.containerSwiper}>
+        )}
+      />
+    );
+
+    if (activeStep === 1) {
+      content = (
+        <CustomLinearGradient
+          children={(
+            <View>
               <PostaniStudent />
               <View style={styles.inputContainer}>
                 <InputComponent
@@ -150,10 +151,16 @@ class App extends React.Component {
                   percentage
                 />
               </View>
+              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="1/5" />
             </View>
-          </LinearGradient>
-          <LinearGradient colors={['#b828fb', '#2569fa']}>
-            <View style={styles.containerSwiper}>
+          )}
+        />
+      );
+    } else if (activeStep === 2) {
+      content = (
+        <CustomLinearGradient
+          children={(
+            <View>
               <PostaniStudent />
               <View style={styles.inputContainer}>
                 <InputComponent
@@ -178,12 +185,17 @@ class App extends React.Component {
                   percentage
                   placeholder="Engleski jezik*"
                 />
-
               </View>
+              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="2/5" />
             </View>
-          </LinearGradient>
-          <LinearGradient colors={['#b828fb', '#2569fa']}>
-            <View style={styles.containerSwiper}>
+          )}
+        />
+      );
+    } else if (activeStep === 3) {
+      content = (
+        <CustomLinearGradient
+          children={(
+            <View>
               <View style={styles.inputContainer}>
                 <InputComponent
                   heading="Prosjeci ocjena srednje škole"
@@ -214,10 +226,16 @@ class App extends React.Component {
                   placeholder="4. razred*"
                 />
               </View>
+              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="3/5" />
             </View>
-          </LinearGradient>
-          <LinearGradient colors={['#b828fb', '#2569fa']}>
-            <View style={styles.containerSwiper}>
+          )}
+        />
+      );
+    } else if (activeStep === 4) {
+      content = (
+        <CustomLinearGradient
+          children={(
+            <View>
               <View style={styles.inputContainer}>
                 <InputComponent
                   heading="Rezultati mature"
@@ -242,18 +260,26 @@ class App extends React.Component {
                   placeholder="Engleski jezik*"
                 />
               </View>
+              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="4/5" />
             </View>
-          </LinearGradient>
-          <LinearGradient colors={['#b828fb', '#2569fa']}>
-            <View style={styles.containerSwiper}>
+        )}
+        />
+      );
+    } else if (activeStep === 5) {
+      content = (
+        <CustomLinearGradient
+          children={(
+            <View>
               <View style={styles.inputContainer}>
                 <Results props={{ ...this.state, totalGradePoints }} />
               </View>
             </View>
-          </LinearGradient>
-        </Swiper>
-      )
-    );
+        )}
+        />
+      );
+    }
+
+    return content;
   }
 }
 

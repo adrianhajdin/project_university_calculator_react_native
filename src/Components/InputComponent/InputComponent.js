@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Text } from 'react-native-elements';
 
-import styles from '../../styles/styles';
+import styles from './styles';
 
 const InputComponent = ({ heading, paragraph }) => (
   <View>

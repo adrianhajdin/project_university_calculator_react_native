@@ -3,14 +3,14 @@ import React from 'react';
 import { View, Linking } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 
-import styles from '../../styles/styles';
+import styles from './styles';
 
 const PostaniStudent = () => (
   <View style={styles.inputContainer}>
     {/* <Text style={styles.inputParagraph}>Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: &nbsp; */}
-    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.postaniStudentContainer}>
       <Text
-        style={{ marginRight: 15, color: 'white', fontFamily: 'Montserrat-Regular', fontSize: 26, textDecorationLine: 'underline' }}
+        style={styles.postaniStudentText}
         onPress={() => Linking.openURL('https://www.postani-student.hr/Ucilista/Nositelji.aspx')}
       >
       POSTANI STUDENT
@@ -21,9 +21,7 @@ const PostaniStudent = () => (
         color="white"
       />
     </View>
-
     {/* </Text> */}
-
   </View>
 );
 

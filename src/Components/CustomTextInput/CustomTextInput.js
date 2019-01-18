@@ -14,7 +14,7 @@ const CustomTextInput = (props) => {
       <TouchableHighlight style={styles.buttonCointainer}>
         <Picker
           selectedValue="A"
-          style={{ width: 75 }}
+          style={styles.width}
         >
           <Picker.Item label="A" value="A" />
           <Picker.Item label="B" value="A" />

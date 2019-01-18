@@ -15,6 +15,7 @@ export default StyleSheet.create({
   loginText: {
     color: '#2569fa',
     fontSize: 20,
+    paddingHorizontal: 15,
   },
   containerSwiper: {
     display: 'flex',
@@ -57,28 +58,5 @@ export default StyleSheet.create({
     marginTop: 25,
     marginBottom: 25,
     padding: 15,
-  },
-  inputHeading: {
-    fontSize: 25,
-    fontFamily: 'Montserrat-Regular',
-    color: white,
-
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  inputParagraph: {
-    fontSize: 18,
-    fontFamily: 'Montserrat-Regular',
-    color: white,
-
-    marginRight: 25,
-    marginLeft: 25,
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  heading: {
-    fontSize: 20,
-    fontFamily: 'Montserrat-Regular',
-    color: white,
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Icon, Text } from 'react-native-elements';
 
-import styles from '../../styles/styles';
+import styles from './styles';
 
 const header = () => (
   <Header>
