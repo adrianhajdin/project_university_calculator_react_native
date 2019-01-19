@@ -9,17 +9,12 @@ export default EStyleSheet.create({
   $buttonBackgroundColorBase: 'white',
   $buttonBackgroundColorModifier: 0.1,
   width: {
-    width: 75,
+    width: 90,
+    color: '#2569fa',
+    borderTopLeftRadius: BORDER_RADIUS,
+    borderBottomLeftRadius: BORDER_RADIUS,
   },
-  container: {
-    backgroundColor: 'white',
-    width: '90%',
-    height: INPUT_HEIGHT,
-    borderRadius: BORDER_RADIUS,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 11,
-  },
+
   buttonContainer: {
     height: INPUT_HEIGHT,
     alignItems: 'center',
@@ -31,13 +26,13 @@ export default EStyleSheet.create({
   border: {
     height: INPUT_HEIGHT,
     width: StyleSheet.hairlineWidth,
-    backgroundColor: 'red',
+    backgroundColor: '#2569fa',
   },
   input: {
     height: INPUT_HEIGHT,
     flex: 1,
-    fontSize: 18,
-    paddingHorizontal: 8,
+    fontSize: 19,
+    paddingLeft: 15,
     color: '#797979',
   },
   buttonText: {
@@ -46,5 +41,13 @@ export default EStyleSheet.create({
     paddingHorizontal: 16,
     color: 'blue',
   },
-
+  container: {
+    backgroundColor: 'white',
+    width: '90%',
+    height: INPUT_HEIGHT,
+    borderRadius: BORDER_RADIUS,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 11,
+  },
 });
