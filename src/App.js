@@ -149,6 +149,9 @@ class App extends React.Component {
       percentageMaturaEnglishError,
       percentageMaturaCroatianError,
       percentageMaturaMathematicsError,
+      evaluationMaturaCroatianLevel,
+      evaluationMaturaEnglishLevel,
+      evaluationMaturaMathematicsLevel,
     } = this.state;
 
     let content = (
@@ -211,6 +214,8 @@ class App extends React.Component {
                   placeholder="Hrvatski jezik*"
                   level
                   error={evaluationErrorCroatian}
+                  selectedValue={evaluationMaturaCroatianLevel}
+                  onValueChange={value => this.setState({ evaluationMaturaCroatianLevel: value })}
                 />
                 <CustomTextInput
                   onChangeText={value => this.setState({ evaluationMaturaMathematics: value })}
@@ -219,6 +224,8 @@ class App extends React.Component {
                   placeholder="Matematika*"
                   level
                   error={evaluationErrorMathematics}
+                  selectedValue={evaluationMaturaMathematicsLevel}
+                  onValueChange={value => this.setState({ evaluationMaturaMathematicsLevel: value })}
                 />
                 <CustomTextInput
                   onChangeText={value => this.setState({ evaluationMaturaEnglish: value })}
@@ -227,6 +234,8 @@ class App extends React.Component {
                   placeholder="Engleski jezik*"
                   level
                   error={evaluationErrorEnglish}
+                  selectedValue={evaluationMaturaEnglishLevel}
+                  onValueChange={value => this.setState({ evaluationMaturaEnglishLevel: value })}
                 />
               </View>
               <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="2/5" />

@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import styles from './styles';
 
 const CustomTextInput = (props) => {
-  const { placeholder, onChangeText, value, level, percentage, error, onBlur, onSubmitEditing } = props;
+  const { placeholder, onChangeText, value, level, percentage, error, onBlur, selectedValue, onValueChange } = props;
 
   return (
     <>
@@ -17,7 +17,6 @@ const CustomTextInput = (props) => {
           placeholder={placeholder}
           style={styles.input}
           onBlur={onBlur}
-          onSubmitEditing={onSubmitEditing}
           keyboardType="phone-pad"
           {...props}
         />
@@ -35,7 +34,8 @@ const CustomTextInput = (props) => {
         <>
           <View style={styles.border} />
           <Picker
-            selectedValue="A"
+            selectedValue={selectedValue}
+            onValueChange={onValueChange}
             style={styles.width}
           >
             <Picker.Item label="A" value="A" />
