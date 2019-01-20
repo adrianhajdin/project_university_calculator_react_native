@@ -12,32 +12,9 @@ export default StyleSheet.create({
     width: 180,
     borderRadius: 40,
   },
-  loginText: {
-    color: '#2569fa',
-    fontSize: 20,
-    paddingHorizontal: 15,
-  },
-  containerSwiper: {
-    display: 'flex',
-    justifyContent: 'center',
-    height: '100%',
-  },
   container: {
     display: 'flex',
     height: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textContainer: {
-    display: 'flex',
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 32,
-  },
-  buttonContainer: {
-    display: 'flex',
-    height: 300,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -59,4 +36,12 @@ export default StyleSheet.create({
     marginBottom: 25,
     padding: 15,
   },
+  textContainer: {
+    display: 'flex',
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 32,
+  },
+
 });

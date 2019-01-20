@@ -3,14 +3,17 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, Image } from 'react-native';
+
+import { calculateTotalGradePoints, calculateTotalMaturaPoints } from '../../util/functions';
+
+import styles from './styles';
+
+const logo = require('../../Images/icon-white.png');
 
 const Results = ({ props: {
-  evaluationMaturaElective1,
-  evaluationMaturaElective2,
-  evaluationMaturaElective3,
   percentagesTotal,
-  totalGradePoints,
+  evaluationSchoolGrades,
   pointsMaturaCroatian,
   pointsMaturaMathematics,
   pointsMaturaEnglish,
@@ -20,69 +23,51 @@ const Results = ({ props: {
   pointsExtraField1,
   pointsExtraField2,
   pointsExtraField3,
-  evaluationExtraField1,
-  evaluationExtraField2,
-  evaluationExtraField3,
-} }) => (
-  <View>
-    <Text>Ukupan prosjek:</Text>
-    <Text>{(percentagesTotal / 4).toFixed(2)}</Text>
+} }) => {
+  const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
+  const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
-    <Text>Broj bodova od ocjena:</Text>
-    <Text>{totalGradePoints}</Text>
-
-    <Text>Broj bodova od mature iz Hrvatskog jezika:</Text>
-    <Text>{pointsMaturaCroatian}</Text>
-
-    <Text>Broj bodova od mature iz Matematike:</Text>
-    <Text>{pointsMaturaMathematics}</Text>
-
-    <Text>Broj bodova od mature iz Engleskog jezika:</Text>
-    <Text>{pointsMaturaEnglish}</Text>
-    {evaluationMaturaElective1
-      ? (
-        <View>
-          <Text>Broj bodova od mature iz 1. Izbornog predmeta:</Text>
-          <Text>{pointsMaturaElective1}</Text>
-        </View>
-      ) : null}
-    {evaluationMaturaElective2
-      ? (
-        <View>
-          <Text>Broj bodova od mature iz 2. Izbornog predmeta:</Text>
-          <Text>{pointsMaturaElective2}</Text>
-        </View>
-      ) : null}
-    {evaluationMaturaElective3
-      ? (
-        <View>
-          <Text>Broj bodova od mature iz 3. Izbornog predmeta:</Text>
-          <Text>{pointsMaturaElective3}</Text>
-        </View>
-      ) : null}
-    {evaluationExtraField1
-      ? (
-        <View>
-          <Text>Broj bodova od dodatnih provjera 1.</Text>
-          <Text>{pointsExtraField1}</Text>
-        </View>
-      ) : null}
-    {evaluationExtraField2
-      ? (
-        <View>
-          <Text>Broj bodova od dodatnih provjera 2..</Text>
-          <Text>{pointsExtraField2}</Text>
-        </View>
-      ) : null}
-    {evaluationExtraField3
-      ? (
-        <View>
-          <Text>Broj bodova od dodatnih provjera 3.</Text>
-          <Text>{pointsExtraField3}</Text>
-        </View>
-      ) : null}
-  </View>
-);
+  return (
+    <View>
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={logo}
+        />
+      </View>
+      <Text style={styles.text}>Rezultati: </Text>
+      <FlatList
+        keyExtractor={(item, index) => index.toString()}
+        data={[
+          { text: 'Ukupan prosjek:', result: (percentagesTotal / 4).toFixed(2) },
+          { text: 'Ocjene:', result: totalGradePoints },
+          { text: 'Matura iz Hrvatskog jezika:', result: pointsMaturaCroatian },
+          { text: 'Matura iz Matematike:', result: pointsMaturaMathematics },
+          { text: 'Matura iz Engleskog jezika:', result: pointsMaturaEnglish },
+          { text: '1. Izbornog predmeta:', result: pointsMaturaElective1 },
+          { text: '2. Izbornog predmeta:', result: pointsMaturaElective2 },
+          { text: '3. Izbornog predmeta:', result: pointsMaturaElective3 },
+          { text: '1. dodatna provjera:', result: pointsExtraField1 },
+          { text: '2. dodatne provjere:', result: pointsExtraField2 },
+          { text: '3. dodatna provjera:', result: pointsExtraField3 },
+        ]}
+        renderItem={({ item }) => (
+          (item.result === '' || item.result === 0 || item.result === null || item.result === undefined)
+            ? null
+            : (
+              <View style={{ padding: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={styles.textItem}>{item.text}</Text>
+                <Text style={styles.textRight}>{item.result}</Text>
+              </View>
+            )
+        )}
+      />
+      <View style={{ marginTop: 30 }}>
+        <Text style={styles.inputParagraph}>Ukupan broj bodova: </Text>
+        <Text style={styles.inputHeading}>{totalGradePoints + totalMaturaPoints}</Text>
+      </View>
+    </View>);
+};
 
 Results.propTypes = {
   props: PropTypes.shape({}).isRequired,

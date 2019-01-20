@@ -36,11 +36,4 @@ export default EStyleSheet.create({
     width: 180,
     borderRadius: 40,
   },
-  textContainer: {
-    display: 'flex',
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 32,
-  },
 });

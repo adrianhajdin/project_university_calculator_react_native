@@ -5,7 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './styles/styles';
 
 import { initialState } from './util/constants';
-import { calculateTotalGradePoints, calculateTotalMaturaPoints, calculateMaturaPoints, calculatePercentages, calculatePoints } from './util/functions';
+import { calculateMaturaPoints, calculatePercentages, calculatePoints } from './util/functions';
 
 import { Results, InputComponent, PostaniStudent, CustomTextInput, CustomButton, CustomLinearGradient } from './Components';
 
@@ -67,7 +67,6 @@ class App extends React.Component {
         if (!percentageError) {
           this.setState({
             activeStep: activeStep + 1,
-            percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
           });
         }
       });
@@ -107,6 +106,7 @@ class App extends React.Component {
         if (!percentageMaturaCroatianError && !percentageMaturaMathematicsError && !percentageMaturaEnglishError) {
           this.setState({
             activeStep: activeStep + 1,
+            percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
             pointsExtraField1: calculatePoints(percentageExtraField1, evaluationExtraField1),
             pointsExtraField2: calculatePoints(percentageExtraField2, evaluationExtraField2),
             pointsExtraField3: calculatePoints(percentageExtraField3, evaluationExtraField3),
@@ -137,7 +137,6 @@ class App extends React.Component {
       percentageMaturaCroatian,
       percentageMaturaMathematics,
       percentageMaturaEnglish,
-      percentagesTotal,
       activeStep,
       percentageError,
       evaluationErrorCroatian,
@@ -147,22 +146,10 @@ class App extends React.Component {
       secondGradeError,
       thirdGradeError,
       fourthGradeError,
-      percentageMaturEnglishError,
+      percentageMaturaEnglishError,
       percentageMaturaCroatianError,
       percentageMaturaMathematicsError,
-      pointsMaturaEnglish,
-      pointsMaturaCroatian,
-      pointsMaturaElective1,
-      pointsMaturaElective2,
-      pointsMaturaElective3,
-      pointsMaturaMathematics,
-      pointsExtraField1,
-      pointsExtraField2,
-      pointsExtraField3,
     } = this.state;
-
-    const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-    const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
     let content = (
       <CustomLinearGradient
@@ -179,7 +166,7 @@ class App extends React.Component {
             </View>
             <CustomButton onPress={this.handlePress} buttonText="KRENI" />
           </View>
-        )}
+      )}
       />
     );
 
@@ -330,7 +317,7 @@ class App extends React.Component {
           children={(
             <View>
               <View style={styles.inputContainer}>
-                <Results props={{ ...this.state, totalGradePoints }} />
+                <Results props={{ ...this.state }} />
               </View>
             </View>
         )}
