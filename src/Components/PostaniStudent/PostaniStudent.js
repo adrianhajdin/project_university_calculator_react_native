@@ -7,7 +7,6 @@ import styles from './styles';
 
 const PostaniStudent = () => (
   <View style={styles.inputContainer}>
-    {/* <Text style={styles.inputParagraph}>Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: &nbsp; */}
     <View style={styles.postaniStudentContainer}>
       <Text
         style={styles.postaniStudentText}
@@ -21,7 +20,6 @@ const PostaniStudent = () => (
         color="white"
       />
     </View>
-    {/* </Text> */}
   </View>
 );
 

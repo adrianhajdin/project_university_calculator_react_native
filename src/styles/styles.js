@@ -12,6 +12,12 @@ export default StyleSheet.create({
     width: 180,
     borderRadius: 40,
   },
+  buttonContainer: {
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   container: {
     display: 'flex',
     height: 250,

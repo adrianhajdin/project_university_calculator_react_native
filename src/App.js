@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import styles from './styles/styles';
@@ -13,14 +13,16 @@ import validator from './validation';
 
 const logo = require('./Images/icon-white.png');
 
-EStyleSheet.build({
-  $textColor: '#0275d8',
-});
+EStyleSheet.build({});
 
 class App extends React.Component {
   state = initialState;
 
-  handleBack = activeStep => this.setState({ activeStep: activeStep - 1 });
+  handleBack = () => {
+    const { activeStep } = this.state;
+
+    this.setState({ activeStep: activeStep - 1 });
+  }
 
   addInputs = (field) => {
     if (field === 'evaluationMaturaElective') {
@@ -334,7 +336,7 @@ class App extends React.Component {
                   error={percentageError}
                 />
               </View>
-              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="1/5" />
+              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="1/6" />
             </View>
           )}
         />
@@ -380,7 +382,12 @@ class App extends React.Component {
                   onValueChange={value => this.setState({ evaluationMaturaEnglishLevel: value })}
                 />
               </View>
-              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="2/5" />
+              <KeyboardAvoidingView behavior="padding">
+                <View style={styles.buttonContainer}>
+                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="2/6" />
+                </View>
+              </KeyboardAvoidingView>
             </View>
           )}
         />
@@ -429,15 +436,17 @@ class App extends React.Component {
                     />
                   ) : null
                 }
-
               </View>
-              <View style={{ padding: 20, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                { !evaluationMaturaElectiveInputs3
-                  ? <CustomButton onPress={() => this.addInputs('evaluationMaturaElective')} buttonText="DODAJ  +" />
-                  : null
+              { !evaluationMaturaElectiveInputs3
+                ? <CustomButton onPress={() => this.addInputs('evaluationMaturaElective')} buttonText="DODAJ  +" />
+                : null
                 }
-                <CustomButton onPress={this.handlePress} buttonText="DALJE" />
-              </View>
+              <KeyboardAvoidingView behavior="padding">
+                <View style={styles.buttonContainer}>
+                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="3/6" />
+                </View>
+              </KeyboardAvoidingView>
             </View>
           )}
         />
@@ -486,15 +495,17 @@ class App extends React.Component {
                     />
                   ) : null
                 }
-
               </View>
-              <View style={{ padding: 20, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                { !evaluationExtraFields3
-                  ? <CustomButton onPress={() => this.addInputs()} buttonText="DODAJ +" />
-                  : null
-                }
-                <CustomButton onPress={this.handlePress} buttonText="DALJE" />
-              </View>
+              { !evaluationExtraFields3
+                ? <CustomButton onPress={() => this.addInputs()} buttonText="DODAJ +" />
+                : null
+              }
+              <KeyboardAvoidingView behavior="padding">
+                <View style={styles.buttonContainer}>
+                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="4/6" />
+                </View>
+              </KeyboardAvoidingView>
             </View>
           )}
         />);
@@ -533,7 +544,12 @@ class App extends React.Component {
                   error={fourthGradeError}
                 />
               </View>
-              <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="3/5" />
+              <KeyboardAvoidingView behavior="padding">
+                <View style={styles.buttonContainer}>
+                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="5/6" />
+                </View>
+              </KeyboardAvoidingView>
             </View>
           )}
         />
@@ -543,100 +559,105 @@ class App extends React.Component {
         <CustomLinearGradient
           children={(
             <View>
-              <ScrollView contentContainerStyle={styles.inputContainer}>
-                <InputComponent
-                  heading="Rezultati mature"
-                  paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature"
-                />
-                <CustomTextInput
-                  onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
-                  value={percentageMaturaCroatian}
-                  percentage
-                  placeholder="Hrvatski jezik"
-                  error={percentageMaturaCroatianError}
-                />
-                <CustomTextInput
-                  onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
-                  value={percentageMaturaMathematics}
-                  percentage
-                  placeholder="Matematika"
-                  error={percentageMaturaMathematicsError}
-                />
-                <CustomTextInput
-                  onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
-                  value={percentageMaturaEnglish}
-                  percentage
-                  placeholder="Engleski jezik"
-                  error={percentageMaturaEnglishError}
-                />
-                { evaluationMaturaElective1 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageMaturaElective1: value })}
-                      value={percentageMaturaElective1}
-                      percentage
-                      placeholder="1. Izborni predmet"
-                      error={percentageMaturaElective1Error}
-                    />
-                  ) : null
+              <KeyboardAvoidingView behavior="padding">
+                <ScrollView contentContainerStyle={styles.inputContainer}>
+                  <InputComponent
+                    heading="Rezultati mature"
+                    paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature"
+                  />
+                  <CustomTextInput
+                    onChangeText={value => this.setState({ percentageMaturaCroatian: value })}
+                    value={percentageMaturaCroatian}
+                    percentage
+                    placeholder="Hrvatski jezik"
+                    error={percentageMaturaCroatianError}
+                  />
+                  <CustomTextInput
+                    onChangeText={value => this.setState({ percentageMaturaMathematics: value })}
+                    value={percentageMaturaMathematics}
+                    percentage
+                    placeholder="Matematika"
+                    error={percentageMaturaMathematicsError}
+                  />
+                  <CustomTextInput
+                    onChangeText={value => this.setState({ percentageMaturaEnglish: value })}
+                    value={percentageMaturaEnglish}
+                    percentage
+                    placeholder="Engleski jezik"
+                    error={percentageMaturaEnglishError}
+                  />
+                  { evaluationMaturaElective1 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageMaturaElective1: value })}
+                        value={percentageMaturaElective1}
+                        percentage
+                        placeholder="1. Izborni predmet"
+                        error={percentageMaturaElective1Error}
+                      />
+                    ) : null
                 }
-                { evaluationMaturaElective2 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageMaturaElective2: value })}
-                      value={percentageMaturaElective2}
-                      percentage
-                      placeholder="2. Izborni predmet"
-                      error={percentageMaturaElective2Error}
-                    />
-                  ) : null
+                  { evaluationMaturaElective2 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageMaturaElective2: value })}
+                        value={percentageMaturaElective2}
+                        percentage
+                        placeholder="2. Izborni predmet"
+                        error={percentageMaturaElective2Error}
+                      />
+                    ) : null
                 }
-                { evaluationMaturaElective3 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageMaturaElective3: value })}
-                      value={percentageMaturaElective3}
-                      percentage
-                      placeholder="3. Izborni predmet"
-                      error={percentageMaturaElective3Error}
-                    />
-                  ) : null
+                  { evaluationMaturaElective3 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageMaturaElective3: value })}
+                        value={percentageMaturaElective3}
+                        percentage
+                        placeholder="3. Izborni predmet"
+                        error={percentageMaturaElective3Error}
+                      />
+                    ) : null
                 }
-                { evaluationExtraField1 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageExtraField1: value })}
-                      value={percentageExtraField1}
-                      percentage
-                      placeholder="1. Dodatna provjera"
-                      error={percentageMaturaExtraField1Error}
-                    />
-                  ) : null
+                  { evaluationExtraField1 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageExtraField1: value })}
+                        value={percentageExtraField1}
+                        percentage
+                        placeholder="1. Dodatna provjera"
+                        error={percentageMaturaExtraField1Error}
+                      />
+                    ) : null
                 }
-                { evaluationExtraField2 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageExtraField2: value })}
-                      value={percentageExtraField2}
-                      percentage
-                      placeholder="2. Dodatna provjera"
-                      error={percentageMaturaExtraField2Error}
-                    />
-                  ) : null
+                  { evaluationExtraField2 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageExtraField2: value })}
+                        value={percentageExtraField2}
+                        percentage
+                        placeholder="2. Dodatna provjera"
+                        error={percentageMaturaExtraField2Error}
+                      />
+                    ) : null
                 }
-                { evaluationExtraField3 !== ''
-                  ? (
-                    <CustomTextInput
-                      onChangeText={value => this.setState({ percentageExtraField3: value })}
-                      value={percentageExtraField3}
-                      percentage
-                      placeholder="3. Dodatna provjera"
-                      error={percentageMaturaExtraField3Error}
-                    />
-                  ) : null
+                  { evaluationExtraField3 !== ''
+                    ? (
+                      <CustomTextInput
+                        onChangeText={value => this.setState({ percentageExtraField3: value })}
+                        value={percentageExtraField3}
+                        percentage
+                        placeholder="3. Dodatna provjera"
+                        error={percentageMaturaExtraField3Error}
+                      />
+                    ) : null
                 }
-              </ScrollView>
-              <CustomButton onPress={this.handlePress} buttonText="ZAVRŠI" buttonProgress="4/5" />
+                </ScrollView>
+                <View style={styles.buttonContainer}>
+                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={this.handlePress} buttonText="ZAVRŠI" buttonProgress="6/6" />
+                </View>
+              </KeyboardAvoidingView>
             </View>
         )}
         />
