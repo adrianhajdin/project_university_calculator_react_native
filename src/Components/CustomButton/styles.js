@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Platform } from 'react-native';
 
 export default EStyleSheet.create({
   flexDirectionRow: {
@@ -33,7 +34,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     height: 60,
-    width: 180,
+    width: Platform.OS === 'ios' ? 160 : 180,
     borderRadius: 40,
   },
 });
