@@ -5,6 +5,7 @@ import { Text, Icon } from 'react-native-elements';
 
 import styles from './styles';
 
+// Komponenta poveznice na Postani student
 const PostaniStudent = () => (
   <View style={styles.inputContainer}>
     <View style={styles.postaniStudentContainer}>

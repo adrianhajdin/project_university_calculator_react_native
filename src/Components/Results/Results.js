@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 
 import { View, Text, FlatList, Image } from 'react-native';
 
-import { calculateTotalGradePoints, calculateTotalMaturaPoints } from '../../util/functions';
+import { calculateTotalGradePoints, calculatePercentagesAndTotalMaturaPoints } from '../../util/helperFunctions';
 
 import styles from './styles';
 
 const logo = require('../../Images/icon-white.png');
 
+// Komponenta zaslužna za prikaz rezultata
 const Results = ({ props: {
   percentagesTotal,
   evaluationSchoolGrades,
@@ -25,7 +26,7 @@ const Results = ({ props: {
   pointsExtraField3,
 } }) => {
   const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-  const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
+  const totalMaturaPoints = calculatePercentagesAndTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
   return (
     <View>

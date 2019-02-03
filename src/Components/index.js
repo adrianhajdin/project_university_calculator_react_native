@@ -1,4 +1,5 @@
-export { default as InputComponent } from './InputComponent/InputComponent';
+// Export komponenti unutar components direktorija
+export { default as InputHeader } from './InputHeader/InputHeader';
 export { default as PostaniStudent } from './PostaniStudent/PostaniStudent';
 export { default as CustomTextInput } from './CustomTextInput/CustomTextInput';
 export { default as Results } from './Results/Results';

@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const white = '#fff';
-const purple = '#b828fb';
-const blue = '#2569fa';
 
 export default StyleSheet.create({
   textItem: {

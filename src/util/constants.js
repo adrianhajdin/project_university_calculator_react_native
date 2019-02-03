@@ -1,7 +1,7 @@
+// Početni state
 export const initialState = {
   percentageError: false,
   gradeError: false,
-  text: '',
   splash: true,
   activeStep: 0,
   evaluationMaturaElectiveInputs2: false,

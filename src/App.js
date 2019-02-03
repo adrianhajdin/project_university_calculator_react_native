@@ -1,29 +1,29 @@
 import React from 'react';
+
+// Import vanjskih modula
 import { View, Text, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
-
 import EStyleSheet from 'react-native-extended-stylesheet';
-import styles from './styles/styles';
 
+// Import pomoćnih funkcija i konstanti
+import { calculateMaturaPoints, calculatePoints, calculatePercentagesAndTotalMaturaPoints } from './util/helperFunctions';
 import { initialState } from './util/constants';
-import { calculateMaturaPoints, calculatePercentages, calculatePoints } from './util/functions';
 
-import { Results, InputComponent, PostaniStudent, CustomTextInput, CustomButton, CustomLinearGradient } from './Components';
-
+// Import komponenti, slika, stilova i validacije
+import { Results, InputHeader, PostaniStudent, CustomTextInput, CustomButton, CustomLinearGradient } from './Components';
+import logo from './Images/icon-white.png';
+import styles from './styles/styles';
 import validator from './validation';
 
-const logo = require('./Images/icon-white.png');
-
+// Postavljanje EStyleSheeta
 EStyleSheet.build({});
 
 class App extends React.Component {
   state = initialState;
 
-  handleBack = () => {
-    const { activeStep } = this.state;
+  // Metoda koja vraća modal za jedan korak natrag
+  handleBack = activeStep => this.setState({ activeStep: activeStep - 1 });
 
-    this.setState({ activeStep: activeStep - 1 });
-  }
-
+  // Metoda koja dodaje dodatna polja
   addInputs = (field) => {
     if (field === 'evaluationMaturaElective') {
       const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
@@ -48,6 +48,7 @@ class App extends React.Component {
     }
   }
 
+  // Metoda koja postavlja novo stanje na svakom idućem koraku
   handlePress = () => {
     const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3 } = this.state;
 
@@ -145,7 +146,7 @@ class App extends React.Component {
         if (!percentageMaturaElective1Error && !percentageMaturaElective2Error && !percentageMaturaElective3Error && !percentageMaturaExtraField1Error && !percentageMaturaExtraField2Error && !percentageMaturaExtraField3Error && !percentageMaturaCroatianError && !percentageMaturaMathematicsError && !percentageMaturaEnglishError) {
           this.setState({
             activeStep: activeStep + 1,
-            percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
+            percentagesTotal: calculatePercentagesAndTotalMaturaPoints(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
             pointsExtraField1: calculatePoints(percentageExtraField1, evaluationExtraField1),
             pointsExtraField2: calculatePoints(percentageExtraField2, evaluationExtraField2),
             pointsExtraField3: calculatePoints(percentageExtraField3, evaluationExtraField3),
@@ -183,6 +184,7 @@ class App extends React.Component {
       />
     );
 
+    // Postavljanje novog sadržaja na dialogContent i buttons nakon promjene koraka
     if (activeStep === 1) {
       content = (
         <CustomLinearGradient
@@ -190,7 +192,7 @@ class App extends React.Component {
             <View>
               <PostaniStudent />
               <View style={styles.inputContainer}>
-                <InputComponent
+                <InputHeader
                   heading="Ocjene iz srednje škole"
                   paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole."
                 />
@@ -213,7 +215,7 @@ class App extends React.Component {
           children={(
             <View>
               <View style={styles.inputContainer}>
-                <InputComponent
+                <InputHeader
                   heading="Obvezni dio državne mature"
                   paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio državne mature"
                 />
@@ -241,7 +243,7 @@ class App extends React.Component {
               </View>
               <KeyboardAvoidingView behavior="padding">
                 <View style={styles.buttonContainer}>
-                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={() => this.handleBack(activeStep)} buttonText="NATRAG" />
                   <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="2/6" />
                 </View>
               </KeyboardAvoidingView>
@@ -255,7 +257,7 @@ class App extends React.Component {
           children={(
             <View>
               <View style={styles.inputContainer}>
-                <InputComponent
+                <InputHeader
                   heading="Izborni dio državne mature"
                   paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
                   fakultet pridaje za izborni dio državne mature"
@@ -300,7 +302,7 @@ class App extends React.Component {
                 }
               <KeyboardAvoidingView behavior="padding">
                 <View style={styles.buttonContainer}>
-                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={() => this.handleBack(activeStep)} buttonText="NATRAG" />
                   <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="3/6" />
                 </View>
               </KeyboardAvoidingView>
@@ -314,7 +316,7 @@ class App extends React.Component {
           children={(
             <View>
               <View style={styles.inputContainer}>
-                <InputComponent
+                <InputHeader
                   heading="Dodatne provjere i posebna postignuća"
                   paragraph="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
                   fakultet pridaje za dodatne provjere i posebna postignuća"
@@ -359,7 +361,7 @@ class App extends React.Component {
               }
               <KeyboardAvoidingView behavior="padding">
                 <View style={styles.buttonContainer}>
-                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={() => this.handleBack(activeStep)} buttonText="NATRAG" />
                   <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="4/6" />
                 </View>
               </KeyboardAvoidingView>
@@ -372,7 +374,7 @@ class App extends React.Component {
           children={(
             <View>
               <View style={styles.inputContainer}>
-                <InputComponent
+                <InputHeader
                   heading="Prosjeci ocjena srednje škole"
                   paragraph="Ovdje upišite prosjeke ocjena koje ste postigli tijekom četiri razreda srednje škole"
                 />
@@ -403,7 +405,7 @@ class App extends React.Component {
               </View>
               <KeyboardAvoidingView behavior="padding">
                 <View style={styles.buttonContainer}>
-                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={() => this.handleBack(activeStep)} buttonText="NATRAG" />
                   <CustomButton onPress={this.handlePress} buttonText="DALJE" buttonProgress="5/6" />
                 </View>
               </KeyboardAvoidingView>
@@ -418,7 +420,7 @@ class App extends React.Component {
             <View>
               <KeyboardAvoidingView behavior="padding">
                 <ScrollView contentContainerStyle={styles.inputContainer}>
-                  <InputComponent
+                  <InputHeader
                     heading="Rezultati mature"
                     paragraph="Ovdje upišite rezultate koje ste postigli na ispitima državne mature te razinu koju planirate položiti"
                   />
@@ -520,7 +522,7 @@ class App extends React.Component {
                 }
                 </ScrollView>
                 <View style={styles.buttonContainer}>
-                  <CustomButton onPress={this.handleBack} buttonText="NATRAG" />
+                  <CustomButton onPress={() => this.handleBack(activeStep)} buttonText="NATRAG" />
                   <CustomButton onPress={this.handlePress} buttonText="ZAVRŠI" buttonProgress="6/6" />
                 </View>
               </KeyboardAvoidingView>

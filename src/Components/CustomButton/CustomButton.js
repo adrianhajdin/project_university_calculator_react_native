@@ -6,6 +6,7 @@ import { Icon } from 'react-native-elements';
 
 import styles from './styles';
 
+// Button komponenta
 const CustomButton = ({ buttonText, buttonProgress, onPress }) => (
   <View style={styles.buttonContainer}>
     <TouchableOpacity

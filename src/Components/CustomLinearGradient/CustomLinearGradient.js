@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './styles';
 
+// Linearni gradient za pozadinu aplikacije
 const CustomLinearGradient = ({ children }) => (
   <View>
     <StatusBar backgroundColor="#b828fb" barStyle="light-content" />

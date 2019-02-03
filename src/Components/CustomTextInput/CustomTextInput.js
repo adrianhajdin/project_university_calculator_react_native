@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 
 import styles from './styles';
 
+// Input komponenta sa validacijom, znakom postotka i odabirom razina
 const CustomTextInput = (props) => {
   const { placeholder, onChangeText, value, level, percentage, error, onBlur, selectedValue, onValueChange } = props;
 

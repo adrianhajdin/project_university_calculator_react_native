@@ -6,16 +6,17 @@ import { Text } from 'react-native-elements';
 
 import styles from './styles';
 
-const InputComponent = ({ heading, paragraph }) => (
+// Komponenta koja prikazuje dodatne informacije o tome što upisati u input
+const InputHeader = ({ heading, paragraph }) => (
   <View>
     <Text style={styles.inputHeading}>{heading}</Text>
     <Text style={styles.inputParagraph}>{paragraph}</Text>
   </View>
 );
 
-InputComponent.propTypes = {
+InputHeader.propTypes = {
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
 };
 
-export default InputComponent;
+export default InputHeader;
