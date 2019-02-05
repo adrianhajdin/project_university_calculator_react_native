@@ -1,5 +1,6 @@
 import validate from 'validate.js';
 
+// Ograničenja za validaciju
 const constraints = {
   postotak: {
     numericality: {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { View, Linking } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
+import { View, Linking } from 'react-native';
 
 import styles from './styles';
 

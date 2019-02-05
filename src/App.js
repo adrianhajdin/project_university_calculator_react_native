@@ -57,6 +57,7 @@ class App extends React.Component {
     } else if (activeStep === 1) {
       const { evaluationSchoolGrades } = this.state;
 
+      // Postavljanje validacije za speficično polje
       const percentageError = validator('postotak', evaluationSchoolGrades);
 
       this.setState({ percentageError }, () => {
@@ -367,7 +368,8 @@ class App extends React.Component {
               </KeyboardAvoidingView>
             </View>
           )}
-        />);
+        />
+      );
     } else if (activeStep === 5) {
       content = (
         <CustomLinearGradient

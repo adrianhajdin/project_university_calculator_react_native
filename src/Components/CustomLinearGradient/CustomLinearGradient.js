@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { View, StatusBar } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { View, StatusBar } from 'react-native';
+import PropTypes from 'prop-types';
 
 import styles from './styles';
 

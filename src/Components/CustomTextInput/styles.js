@@ -1,5 +1,4 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
 import { StyleSheet } from 'react-native';
 
 const INPUT_HEIGHT = 48;

@@ -3,7 +3,8 @@ import { Platform } from 'react-native';
 
 export default EStyleSheet.create({
   flexDirectionRow: {
-    display: 'flex', flexDirection: 'row',
+    display: 'flex',
+    flexDirection: 'row',
   },
   loginText: {
     color: '#2569fa',

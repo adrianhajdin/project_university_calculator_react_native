@@ -1,15 +1,12 @@
 
 import React from 'react';
 
+import { View, Text, FlatList, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { View, Text, FlatList, Image } from 'react-native';
-
-import { calculateTotalGradePoints, calculatePercentagesAndTotalMaturaPoints } from '../../util/helperFunctions';
-
 import styles from './styles';
-
-const logo = require('../../Images/icon-white.png');
+import { calculateTotalGradePoints, calculatePercentagesAndTotalMaturaPoints } from '../../util/helperFunctions';
+import logo from '../../Images/icon-white.png';
 
 // Komponenta zaslužna za prikaz rezultata
 const Results = ({ props: {
