@@ -1,4 +1,5 @@
 {
-  "name": "AwesomeProject",
-  "displayName": "Kalkulator za maturu"
+  "name": "KalkulatorBodovaZaMaturu",
+  "displayName": "Kalkulator za maturu",
+  "version": "Beta"
 }

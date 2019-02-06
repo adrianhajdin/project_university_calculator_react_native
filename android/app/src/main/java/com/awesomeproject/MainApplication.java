@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.kalkulatorbodovazamaturu;
 
 import android.app.Application;
 
