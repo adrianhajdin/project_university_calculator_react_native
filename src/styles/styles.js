@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 const white = '#fff';
 
 export default StyleSheet.create({
@@ -13,14 +15,14 @@ export default StyleSheet.create({
     borderRadius: 40,
   },
   buttonContainer: {
-    padding: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    width: wp('100%'),
   },
   container: {
     display: 'flex',
-    height: 250,
+    height: hp('25%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -38,16 +40,15 @@ export default StyleSheet.create({
   inputContainer: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: 25,
-    marginBottom: 25,
+    height: hp('85%'),
+    justifyContent: 'center',
     padding: 15,
   },
   textContainer: {
     display: 'flex',
-    height: 300,
+    height: hp('50%'),
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
   },
-
 });

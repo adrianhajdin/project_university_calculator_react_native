@@ -1,5 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export default EStyleSheet.create({
   postaniStudentContainer: {
     display: 'flex',
@@ -17,8 +19,8 @@ export default EStyleSheet.create({
   inputContainer: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: 25,
-    marginBottom: 25,
+    height: hp('10%'),
+    justifyContent: 'center',
     padding: 15,
   },
 });

@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Platform } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default EStyleSheet.create({
   flexDirectionRow: {
@@ -19,23 +19,23 @@ export default EStyleSheet.create({
   },
   buttonContainer: {
     display: 'flex',
-    marginTop: 100,
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    height: hp('15%'),
+    paddingHorizontal: 5,
   },
-  loginTextProgress: {
+  buttonText: {
     color: '#2569fa',
     fontSize: 15,
     marginRight: 5,
   },
-  loginScreenButton: {
+  button: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
     height: 60,
-    width: Platform.OS === 'ios' ? 160 : 180,
+    width: wp('40%'),
     borderRadius: 40,
   },
 });
