@@ -26,7 +26,7 @@ const Results = ({ props: {
   const totalMaturaPoints = calculatePercentagesAndTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
   return (
-    <View>
+    <View style={{ backgroundColor: 'blue' }}>
       <View style={styles.container}>
         <Image
           style={styles.image}
@@ -60,11 +60,12 @@ const Results = ({ props: {
             )
         )}
       />
-      <View style={{ marginTop: 30 }}>
+      <View style={{ marginTop: 30, backgroundColor: 'yellow' }}>
         <Text style={styles.inputParagraph}>Ukupan broj bodova: </Text>
         <Text style={styles.inputHeading}>{totalGradePoints + totalMaturaPoints}</Text>
       </View>
-    </View>);
+    </View>
+  );
 };
 
 Results.propTypes = {
