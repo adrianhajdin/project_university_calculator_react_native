@@ -1,4 +1,4 @@
-# Kalkulator bodova za fakultet
+# Kalkulator bodova za maturu
 
 ![Kalkulator bodova za maturu](https://lh3.googleusercontent.com/Ff1t5J9RWJWcrrICDfONRWerp--SwtrYrHj3VHMcfRMaR0aFNUrkYsy1PtpzJ8uFCflG)
 
